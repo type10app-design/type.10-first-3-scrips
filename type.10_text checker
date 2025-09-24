@@ -1,0 +1,40 @@
+import tkinter as tk
+import random
+
+def main():
+    root = tk.Tk()
+    root.title("type.10 prototype")
+
+    things_to_write = ["hello world", "today", "we had a good day", "how are you doing today?"]
+    target_text = random.choice(things_to_write)
+
+    # Show the text to type
+    label_target = tk.Label(root, text=target_text, font=("Courier", 18))
+    label_target.pack(pady=10)
+
+    # Input box
+    entry = tk.Entry(root, font=("Courier", 18))
+    entry.pack(pady=10)
+
+    # Feedback label
+    result_label = tk.Label(root, text="Start typing...", font=("Arial", 14))
+    result_label.pack(pady=10)
+
+    # Function to check typing
+    def check_text(event):
+        typed = entry.get()
+        if typed == target_text:
+            result_label.config(text="✅ Correct!")
+        else:
+            result_label.config(text="Keep going...")
+
+    # Bind every key release to checking function
+    entry.bind("<KeyRelease>", check_text)
+
+    # Start Tkinter loop
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
+
